@@ -1,6 +1,5 @@
+import Swal from 'sweetalert2'
 import { Link } from "react-router-dom";
-import swal from 'sweetalert';
-
 
 const AddCoffee = () => {
 
@@ -8,6 +7,7 @@ const AddCoffee = () => {
         event.preventDefault();
 
         const form = event.target;
+        
 
         const name = form.name.value;
         const chef = form.chef.value;
@@ -23,21 +23,26 @@ const AddCoffee = () => {
 
         // send data to server
 
-        fetch('http://localhost:5000/coffee',{
+        fetch('http://localhost:5000/add-coffee', {
             method: 'POST',
-            headers:{
-                'content-type' : 'application/json'
+            headers: {
+                'content-type': 'application/json'
             },
             body: JSON.stringify(addCoffee)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if(data.insertedId){
-                    swal("Good job!", "Coffee is added successfully");
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Wow!',
+                        text: 'Coffee added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
                 }
-                form.reset()
             })
+
     }
 
     return (

@@ -6,8 +6,10 @@ const Home = () => {
     return (
         <div>
             <Header></Header>
-           
-            <Outlet></Outlet>
+
+            <div className="bg-[#ffffff]">
+                <Outlet></Outlet>
+            </div>
         </div>
     );
 };
